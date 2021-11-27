@@ -7,10 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import textprocessing.BruteForceMatch;
-import textprocessing.In;
 
-public class WebSearch {
+public class WebSearchByBruteForce {
 
 	public static void bruteForceSearch(String searchInput) {
 		try {

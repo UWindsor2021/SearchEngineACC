@@ -20,7 +20,6 @@ import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import textprocessing.BruteForceMatch;
 
 public class Main {
 
@@ -56,7 +55,7 @@ public class Main {
 				String searchInputStr = "";
 				searchInputStr += scanner.nextLine();
 
-				SymbolGraphSearch.SymbolGraphAndPatternSearch(searchInputStr);
+				SymbolGraphSearch.SearchBySymbolGraphAndRegx(searchInputStr);
 
 				System.out.print("\n");
 				break;
@@ -73,7 +72,7 @@ public class Main {
 				scanner = new Scanner(System.in);
 				String keyword = "";
 				keyword += scanner.nextLine();
-				WebSearch.bruteForceSearch(keyword);
+				WebSearchByBruteForce.bruteForceSearch(keyword);
 
 				System.out.print("\n");
 				break;
@@ -86,21 +85,6 @@ public class Main {
 		} while (option != 'e');
 
 		System.out.println("Thank you for using our services");
-
-	}
-
-	public static void extractDataWithJsoup(String href) {
-		try {
-
-			Document doc1 = Jsoup.connect(href).get();
-			System.out.println("1");
-			String title1 = doc1.title();
-			var body1 = doc1.body().html();
-			String innerHtml = Jsoup.parse(body1, "ISO-8859-1").select("body").text();
-			System.out.println(innerHtml);
-		} catch (IOException e) {
-			// Your exception handling here
-		}
 
 	}
 

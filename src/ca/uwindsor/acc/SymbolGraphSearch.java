@@ -19,13 +19,13 @@ import graphs.In;
 
 public class SymbolGraphSearch {
 	
-	public static void SymbolGraphAndPatternSearch(String input) {
+	public static void SearchBySymbolGraphAndRegx(String input) {
 
 		System.out.println(input);
 
 		// Input is number so the search method will be finding year with pattern
 		if (isNumeric(input)) {
-			findMovieByProductionYear(input);
+			findMovieByRegex(input);
 		} else {
 			String delimiter = "[,/]";
 			if (input.contains(" ")) {
@@ -37,7 +37,7 @@ public class SymbolGraphSearch {
 			printSingleLine();
 
 			// Finding Movie names by symbol graph
-			findMovie(input, sg);
+			findMovieBySymbolGrap(input, sg);
 		}
 
 	}
@@ -48,7 +48,7 @@ public class SymbolGraphSearch {
 		return input;
 	}
 
-	private static void findMovie(String source, SymbolGraph sg) {
+	private static void findMovieBySymbolGrap(String source, SymbolGraph sg) {
 		try {
 			Graph G = sg.G();
 
@@ -72,7 +72,7 @@ public class SymbolGraphSearch {
 
 	}
 
-	public static void findMovieByProductionYear(String year) {
+	public static void findMovieByRegex(String year) {
 		// String to be scanned to find the pattern.
 		try {
 			// A Space Travesty (2000)
