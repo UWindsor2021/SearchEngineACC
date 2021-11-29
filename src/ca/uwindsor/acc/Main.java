@@ -18,26 +18,32 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.lucene.search.spell.PlainTextDictionary;
+import org.apache.lucene.search.spell.SpellChecker;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		char option = '\0';
 
 		System.out.println("***********************************************************************************");
 		System.out.println("					Welcome ");
 		System.out.println("				Project Members: ");
-		System.out.println("			  Anahita Sedighikasmaei, Tarun x ");
+		System.out.println("			  Anahita Sedighikasmaei, Tarun Sai Prathipati ");
 		System.out.println("**********************************************************************************");
 		System.out.println("Select one item from menu:");
 		System.out.println("A. Search By SymbolGraph and Regular expressions Pattern");
 		System.out.println("B. Extract web page to text by Jsoup");
 		System.out.println("C. Search keywords by BruteForce");
-		System.out.println("D. Feature3");
-		System.out.println("E. Exit");
+		System.out.println("D. Search keywords using Boyer Moore Search");
+		System.out.println("E. Suggest close words");
+		System.out.println("F. Exit");
 
+		
 		do {
 			Scanner scanner = new Scanner(System.in);
 			printDoubleLine();
@@ -61,7 +67,7 @@ public class Main {
 				break;
 			case 'b':
 
-				HTMLtoText.extactUlsAndCache();
+				Html2Text.extactUlsAndCache();
 				System.out.print("\n");
 				System.out.println("Page extraction finished successfully");
 				System.out.print("\n");
@@ -78,13 +84,34 @@ public class Main {
 				break;
 			case 'd':
 
-				System.out.print("C is running");
-				System.out.print("\n");
+				B_Search.mainCall();
+				break;
+			case 'e':
+
+				scanner = new Scanner(System.in);
+				System.out.println("Enter the word");
+				String text1 = scanner.next();
+				suggester.suggest(text1);
 				break;
 			}
-		} while (option != 'e');
+		} while (option != 'f');
 
-		System.out.println("Thank you for using our services");
+		System.out.println("Thank you for using our search engine");
+
+	}
+
+	public static void extractDataWithJsoup(String href) {
+		try {
+
+			Document doc1 = Jsoup.connect(href).get();
+			System.out.println("1");
+			String title1 = doc1.title();
+			var body1 = doc1.body().html();
+			String innerHtml = Jsoup.parse(body1, "ISO-8859-1").select("body").text();
+			System.out.println(innerHtml);
+		} catch (IOException e) {
+			// Your exception handling here
+		}
 
 	}
 
